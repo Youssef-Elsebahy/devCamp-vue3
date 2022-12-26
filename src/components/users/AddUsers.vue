@@ -49,7 +49,7 @@ export default defineComponent({
                 <label for="email">Email</label>
                 <input type="email" id="email" v-model="form.email" required />
             </div>
-            <button type="submit">Add User</button>
+            <button type="submit">{{ user ? 'Update User' : 'Add User' }}</button>
         </form>
     </div>
 </template>
@@ -58,6 +58,9 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: "AddUsers",
+    props: {
+        user: Object // { firstName: string, lastName: string, age: number, email: email }
+    },
     methods: {
         onAddUser() {
             this.$emit('userAdded', this.form)
@@ -65,12 +68,13 @@ export default defineComponent({
     },
     data() {
         return {
-            form: {
-                firstName: "",
-                lastName: "",
-                age: "",
-                email: ""
-            }
+            // form: this.user ? this.user : {
+            //     firstName: "",
+            //     lastName: "",
+            //     age: "",
+            //     email: ""
+            // }
+            form: this.user || { firstName: "", lastName: "", age: "", email: "" }
         }
     }
 })

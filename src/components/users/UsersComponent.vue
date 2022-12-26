@@ -1,13 +1,15 @@
 <template>
     <div class="users-list mt-5">
         <h2>Users List</h2>
-        <table v-if="usersList.length" class="w-100 table bordered">
+        <table v-if="usersList?.length" class="w-100 table bordered">
             <thead>
                 <tr>
                     <th>first name</th>
                     <th>last name</th>
                     <th>age</th>
                     <th>email</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -23,7 +25,7 @@
                 </template>
             </tbody>
         </table>
-        <p v-else-if="usersList.lenght === 0">no users found ...</p>
+        <p v-else-if="usersList?.length === 0">no users found ...</p>
     </div>
 </template>
 

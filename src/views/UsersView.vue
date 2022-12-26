@@ -2,7 +2,7 @@
     <div class="users container">
         <NavBar></NavBar>
         <UsersComponent v-if="showList" :usersList="users" @deleteUser="deleteUser" @editUser="editUser" />
-        <AddUsers v-else @userAdded="addUser($event); showList = true" />
+        <AddUsers v-else @userAdded="addUser($event); showList = true" :user="userToBeEdited" />
         <button class="mt-3" v-if="showList" @click="showList = false">Add New User</button>
     </div>
 </template>
@@ -30,11 +30,17 @@ export default defineComponent({
                 { firstName: 'yusuf', lastName: 'yehia', age: 26, email: 'yusuf@gmail.com' },
                 { firstName: 'osama', lastName: 'amer ', age: 25, email: 'osama@gmail.com' }
             ],
+            userToBeEdited: {},
+            userIndex: -1
         }
     },
     methods: {
         addUser(user: any) {
-            this.users.push(user)
+            if ( this.userIndex > -1 ) { // update user
+                this.users.splice(this.userIndex, 2, user);
+            } else { // add user
+                this.users.push(user);
+            }
             localStorage.setItem('users', JSON.stringify(this.users))
         },
         deleteUser(i: any) {
@@ -43,7 +49,9 @@ export default defineComponent({
         },
         editUser(index: any) {
             console.log(index)
-            console.log(this.users[index])
+            console.log(this.users[index]);
+            this.userIndex = index;
+            this.userToBeEdited = this.users[index];
             this.showList= false;
         }  
     },
