@@ -17,7 +17,8 @@
                         <td>{{ user.lastName }}</td>
                         <td>{{ user.age }}</td>
                         <td>{{ user.email }}</td>
-                        <td> <b-button @click="$emit('deleteUser', i)" variant="danger">delete</b-button></td>
+                        <td> <b-button @click="$emit('editUser', i)" variant="primary">Edit</b-button></td>
+                        <td> <b-button @click="$emit('deleteUser', i)" variant="danger">Delete</b-button></td>
                     </tr>
                 </template>
             </tbody>
@@ -39,21 +40,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-h3 {
-    margin: 40px 0 0;
-}
 
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    display: inline-block;
-    margin: 0 10px;
-}
-
-a {
-    color: #42b983;
-}
 </style>

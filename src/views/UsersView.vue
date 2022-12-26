@@ -1,7 +1,7 @@
 <template>
     <div class="users container">
         <NavBar></NavBar>
-        <UsersComponent v-if="showList" :usersList="users" @deleteUser="deleteUser" />
+        <UsersComponent v-if="showList" :usersList="users" @deleteUser="deleteUser" @editUser="editUser" />
         <AddUsers v-else @userAdded="addUser($event); showList = true" />
         <button class="mt-3" v-if="showList" @click="showList = false">Add New User</button>
     </div>
@@ -13,6 +13,12 @@ import UsersComponent from '../components/users/UsersComponent.vue';
 import NavBar from '../components/shared/NavBar.vue'
 import AddUsers from '../components/users/AddUsers.vue'
 
+interface User {
+    firstName: string,
+    lastName: string,
+    age?: string,
+    email: string
+}
 export default defineComponent({
     name: 'UsersView',
     components: { UsersComponent, NavBar, AddUsers },
@@ -34,7 +40,12 @@ export default defineComponent({
         deleteUser(i: any) {
             this.users.splice(i, 1)
             localStorage.setItem('users', JSON.stringify(this.users))
-        }   
+        },
+        editUser(index: any) {
+            console.log(index)
+            console.log(this.users[index])
+            this.showList= false;
+        }  
     },
     mounted() {
         if (localStorage.getItem('users')) {
