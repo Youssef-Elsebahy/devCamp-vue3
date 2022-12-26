@@ -19,8 +19,8 @@
                         <td>{{ user.lastName }}</td>
                         <td>{{ user.age }}</td>
                         <td>{{ user.email }}</td>
-                        <td> <b-button @click="$emit('editUser', i)" variant="primary">Edit</b-button></td>
-                        <td> <b-button @click="$emit('deleteUser', i)" variant="danger">Delete</b-button></td>
+                        <td> <b-button @click="$emit('editUser', user)" variant="primary">Edit</b-button></td>
+                        <td> <b-button @click="$emit('deleteUser', user)" variant="danger">Delete</b-button></td>
                     </tr>
                 </template>
             </tbody>

@@ -35,7 +35,7 @@ export default defineComponent({
             <h1>New user Form</h1>
             <div class="input__field">
                 <label for="firstName">First name</label>
-                <input type="text" id="firstName" v-model="form.firstName" required />
+                <input type="text" id="firstName" v-model="form.firstName" minlength="3" required />
             </div>
             <div class="input__field">
                 <label for="lastName">Last name</label>
@@ -43,7 +43,7 @@ export default defineComponent({
             </div>
             <div class="input__field">
                 <label for="age">Age</label>
-                <input type="text" id="age" v-model="form.age" required />
+                <input type="number" id="age" v-model="form.age" min="1" required />
             </div>
             <div class="input__field">
                 <label for="email">Email</label>

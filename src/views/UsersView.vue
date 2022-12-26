@@ -2,7 +2,7 @@
     <div class="users container">
         <NavBar></NavBar>
         <UsersComponent v-if="showList" :usersList="users" @deleteUser="deleteUser" @editUser="editUser" />
-        <AddUsers v-else @userAdded="addUser($event); showList = true" :user="userToBeEdited" />
+        <AddUsers v-else @userAdded="addUpdateUser($event); showList = true" :user="userToBeEdited" />
         <button class="mt-3" v-if="showList" @click="showList = false">Add New User</button>
     </div>
 </template>
@@ -14,6 +14,7 @@ import NavBar from '../components/shared/NavBar.vue'
 import AddUsers from '../components/users/AddUsers.vue'
 
 interface User {
+    id?: number,
     firstName: string,
     lastName: string,
     age?: string,
@@ -30,15 +31,17 @@ export default defineComponent({
                 { firstName: 'yusuf', lastName: 'yehia', age: 26, email: 'yusuf@gmail.com' },
                 { firstName: 'osama', lastName: 'amer ', age: 25, email: 'osama@gmail.com' }
             ],
-            userToBeEdited: {},
-            userIndex: -1
+            userToBeEdited: {}
         }
     },
     methods: {
-        addUser(user: any) {
-            if ( this.userIndex > -1 ) { // update user
-                this.users.splice(this.userIndex, 2, user);
+        addUpdateUser(user: any) {
+            if ( user.id ) { // update user
+                // const editedUser = this.users.find((u: any) => u.id === user.id);
+                // console.log(editedUser);
+                // this.users.splice(this.userIndex, 2, user);
             } else { // add user
+                user.id = new Date().getTime(); // new unique id in miliseconds
                 this.users.push(user);
             }
             localStorage.setItem('users', JSON.stringify(this.users))
@@ -47,11 +50,8 @@ export default defineComponent({
             this.users.splice(i, 1)
             localStorage.setItem('users', JSON.stringify(this.users))
         },
-        editUser(index: any) {
-            console.log(index)
-            console.log(this.users[index]);
-            this.userIndex = index;
-            this.userToBeEdited = this.users[index];
+        editUser(user: User) {
+            this.userToBeEdited = user;
             this.showList= false;
         }  
     },
