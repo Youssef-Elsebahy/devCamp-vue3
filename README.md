@@ -25,7 +25,15 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Tasks
 
+### 1st
 - make a form to add new user to the list *done*
 - maintain the list data in local storage *done*
 - delete user from a list *done*
-- edit user from the list *in progress*
+- edit user from the list *done*
+
+### 2nd
+- Add validations in the fields for proper input *in progress*
+- Add new fields to take the profile picture and bio of the user. *done*
+- Show profile picture in the users list *done*
+- Make a user profile page where all this information is shown *in progress*
+- Add option in users list to navigate to the users profile *done*
