@@ -1,34 +1,3 @@
-<!-- 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { reactive } from 'vue';
-let form = {}
-export default defineComponent({
-    name: "AddUsers",
-    methods: {
-        onAddUser() {
-            this.$emit('userAdded', this.form)
-            alert("form submitted")
-        }
-    },
-    setup() {
-         form = reactive({
-            firstName: "",
-            lastName: "",
-            age: "",
-            email: ""
-        })
-        return {
-            form 
-        }
-    },
-    mounted() {
-        console.log(this.form)
-    }
-
-})
-</script> -->
-
 <template>
     <div class="add-users my-5">
         <form @submit.prevent="onAddUser" class="newUser-form p-2 m-2">
@@ -43,7 +12,7 @@ export default defineComponent({
             </div>
             <div class="input__field">
                 <label for="age">Age</label>
-                <input type="number" id="age" v-model="form.age" min="1" required />
+                <input type="number" id="age" min="10" max="100" v-model="form.age" required />
             </div>
             <div class="input__field">
                 <label for="email">Email</label>
@@ -57,7 +26,7 @@ export default defineComponent({
                 <label for="bio">Bio</label>
                 <textarea name="bio" id="bio" v-model="form.bio" ></textarea>
             </div>
-            <button type="submit">{{ user?.id ? 'Update User' : 'Add User' }}</button>
+            <button class="btn btn-primary" type="submit">{{ user?.id ? 'Update User' : 'Add User' }}</button>
         </form>
     </div>
 </template>
@@ -128,7 +97,6 @@ export default defineComponent({
         }
 
     }
-
     button {
         margin-top: 30px;
         padding: 10px;

@@ -17,7 +17,8 @@
             <tbody>
                 <template v-for="user, i in usersList" :key="i">
                     <tr>
-                        <td><img :src="user.image" style="width:200px; height: 200px; border-radius: 50%;" alt=""></td>
+                        <td v-if="user.image"><b-avatar :src="user.image" size="6rem"></b-avatar></td>
+                        <td v-else></td>
                         <td>{{ user.firstName }}</td>
                         <td>{{ user.lastName }}</td>
                         <td>{{ user.age }}</td>
@@ -45,6 +46,7 @@ export default defineComponent({
 
 </script>
 
-<style scoped>
+<style scoped lang="css">
+
 
 </style>
