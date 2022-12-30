@@ -16,7 +16,7 @@ import AddUsers from '../components/users/AddUsers.vue'
 interface User {
     firstName: string,
     lastName: string,
-    age?: string,
+    age?: number,
     email: string
 }
 export default defineComponent({
@@ -41,15 +41,15 @@ export default defineComponent({
             } else { // add user
                 this.users.push(user);
             }
+            
+            localStorage.setItem('users', JSON.stringify(this.users))
+            this.userToBeEdited = {}
+        },
+        deleteUser(index: number) {
+            this.users.splice(index, 1)
             localStorage.setItem('users', JSON.stringify(this.users))
         },
-        deleteUser(i: any) {
-            this.users.splice(i, 1)
-            localStorage.setItem('users', JSON.stringify(this.users))
-        },
-        editUser(index: any) {
-            console.log(index)
-            console.log(this.users[index]);
+        editUser(index: number) {
             this.userIndex = index;
             this.userToBeEdited = this.users[index];
             this.showList= false;

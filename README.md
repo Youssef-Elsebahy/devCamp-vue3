@@ -25,7 +25,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Tasks
 
-- make a form to add new user to the list *done*
-- maintain the list data in local storage *done*
-- delete user from a list *done*
-- edit user from the list *in progress*
+- make a form to add new user to the list/ *done*
+- maintain the list data in local storage/ *done*
+- delete user through index from a list/ *done*
+- edit user from the list through index/ *done*
