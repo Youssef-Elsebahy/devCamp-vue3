@@ -1,7 +1,6 @@
 <template lang="">
     <div class="single-user">
-       {{ this.$route.params.id }}
-       <div>{{ this.users}}</div>
+       <div>{{ user.firstName }}</div>
        <router-link :to="{name: 'users'}">back to users list</router-link>
     </div>
 </template>
@@ -9,12 +8,16 @@
 
 export default {
     name: "UserProfile",
-    props: { 
-    usersList: Object
-},
+    data() {
+        return {
+            user: {},
+        }
+    },
     mounted() {
         if (localStorage.getItem('users')) {
-            this.users = JSON.parse(localStorage.getItem('users') || '{}')
+             const users= JSON.parse(localStorage.getItem('users') || '{}')
+              this.user = users.filter((u) => u.id === this.$route.params.id)
+              console.log(this.user)
         }
     }
 }
@@ -22,3 +25,5 @@ export default {
 <style lang="">
     
 </style>
+
+<!-- still working on this component -->

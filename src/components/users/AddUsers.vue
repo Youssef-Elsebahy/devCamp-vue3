@@ -72,17 +72,18 @@ export default defineComponent({
     methods: {
         onAddUser() {
             this.$emit('userAdded', this.form)
-            console.log(this.form)
         },
         imageUpload(event: any) {
             const imageObj = event.target.files[0];
-            const reader = new FileReader();
+            if(imageObj.size > 250000){
+                alert('image size should not be more than 250kb')
+            } else {
+                const reader = new FileReader();
             reader.readAsDataURL(imageObj);
             reader.addEventListener('load', () => {
                 this.form.image = reader.result
-            })
-           
-           
+                 })
+            }   
         }
     },
     data() {
