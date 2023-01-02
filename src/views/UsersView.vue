@@ -1,8 +1,8 @@
 <template>
     <div class="users container">
         <NavBar></NavBar>
-        <UsersComponent v-if="showList" :usersList="users" @deleteUser="deleteUser" @editUser="editUser" />
-        <AddUsers v-else @userAdded="addUpdateUser($event); showList = true" :user="userToBeEdited" />
+        <UsersComponent v-if="showList" :usersList="users" @deleteUser="deleteUser" @editUser="editUser"/>
+        <AddUsers v-else @userAdded="addUpdateUser($event); showList = true" :user="userToBeEdited"/>
         <button class="mt-3" v-if="showList" @click="showList = false">Add New User</button>
     </div>
 </template>
@@ -13,11 +13,12 @@ import UsersComponent from '../components/users/UsersComponent.vue';
 import NavBar from '../components/shared/NavBar.vue'
 import AddUsers from '../components/users/AddUsers.vue'
 
+
 interface User {
     id?: number,
     firstName: string,
     lastName: string,
-    age?: string,
+    age?: number,
     email: string
 }
 export default defineComponent({
@@ -39,7 +40,7 @@ export default defineComponent({
             if (user.id) { // update user working with v-model since we are passing the same object around
                 // const editedUser = this.users.find((u: any) => u.id === user.id);
                 // console.log(editedUser);
-                // this.users.splice(this.userIndex, 2, user);
+                //this.users.splice(this.userIndex, 2, user);
             } else { // add user
                 user.id = new Date().getTime(); // new unique id in miliseconds
                 this.users.push(user);
@@ -48,8 +49,8 @@ export default defineComponent({
             this.userToBeEdited = {}
         },
         deleteUser(user: any) {
-            for (let index = 0; index < this.users.length; index++) {
-                if (this.users[index].id == user.id) {
+            for(let index = 0 ; index < this.users.length; index++){
+                if(this.users[index].id == user.id) {
                     this.users.splice(index, 1)
                     break;
                 }
@@ -58,8 +59,8 @@ export default defineComponent({
         },
         editUser(user: User) {
             this.userToBeEdited = user;
-            this.showList = false;
-        }
+            this.showList= false;
+        }, 
     },
     mounted() {
         if (localStorage.getItem('users')) {

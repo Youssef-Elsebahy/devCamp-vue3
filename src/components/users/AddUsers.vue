@@ -12,13 +12,21 @@
             </div>
             <div class="input__field">
                 <label for="age">Age</label>
-                <input type="number" id="age" min="5" v-model="form.age" required />
+                <input type="number" id="age" min="10" max="100" v-model="form.age" required />
             </div>
             <div class="input__field">
                 <label for="email">Email</label>
                 <input type="email" id="email" v-model="form.email" required />
             </div>
-            <button type="submit">{{ user?.id ? 'Update User' : 'Add User' }}</button>
+            <div class="input__field">
+                <label for="image"> Upload Profile Picture</label>
+                <input type="file" id="image" name="image" accept=".png, .jpg, .jpeg" @change="imageUpload" v-on="form.image" />
+            </div>
+            <div class="input__field">
+                <label for="bio">Bio</label>
+                <textarea name="bio" id="bio" v-model="form.bio" ></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">{{ user?.id ? 'Update User' : 'Add User' }}</button>
         </form>
     </div>
 </template>
@@ -33,6 +41,18 @@ export default defineComponent({
     methods: {
         onAddUser() {
             this.$emit('userAdded', this.form)
+        },
+        imageUpload(event: any) {
+            const imageObj = event.target.files[0];
+            if(imageObj.size > 250000){
+                alert('image size should not be more than 250kb')
+            } else {
+                const reader = new FileReader();
+            reader.readAsDataURL(imageObj);
+            reader.addEventListener('load', () => {
+                this.form.image = reader.result
+                 })
+            }   
         }
     },
     data() {
@@ -43,7 +63,7 @@ export default defineComponent({
             //     age: "",
             //     email: ""
             // }
-            form: this.user || { firstName: "", lastName: "", age: null, email: "" }
+            form: this.user || { firstName: "", lastName: "", age: null, email: "", image: "", bio: "" }
         }
     }
 })
