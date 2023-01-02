@@ -37,7 +37,7 @@ export default defineComponent({
     },
     methods: {
         addUpdateUser(user: any) {
-            if ( user.id ) { // update user
+            if (user.id) { // update user working with v-model since we are passing the same object around
                 // const editedUser = this.users.find((u: any) => u.id === user.id);
                 // console.log(editedUser);
                 //this.users.splice(this.userIndex, 2, user);
@@ -49,13 +49,13 @@ export default defineComponent({
             this.userToBeEdited = {}
         },
         deleteUser(user: any) {
-                for(let index = 0 ; index < this.users.length; index++){
-                    if(this.users[index].id == user.id) {
-                        this.users.splice(index, 1)
-                        break;
-                    }
+            for(let index = 0 ; index < this.users.length; index++){
+                if(this.users[index].id == user.id) {
+                    this.users.splice(index, 1)
+                    break;
                 }
-               localStorage.setItem('users', JSON.stringify(this.users))
+            }
+            localStorage.setItem('users', JSON.stringify(this.users))
         },
         editUser(user: User) {
             this.userToBeEdited = user;

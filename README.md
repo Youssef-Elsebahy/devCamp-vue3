@@ -30,3 +30,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - Show profile picture in the users list/ *done*
 - Make a user profile page where all this information is shown/ *done*
 - Add option in users list to navigate to the users profile/ *done*
+- make a form to add new user to the list/ *done*
+- maintain the list data in local storage/ *done*
+- delete user by id from a list/ *done*
+- edit user by id from the list/ *done*
